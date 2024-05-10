@@ -2,6 +2,8 @@ FROM ubuntu:22.04
 
 WORKDIR /var/www/html
 
+ARG WWWGROUP=1000
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=America/Sao_Paulo
 ENV SUPERVISOR_PHP_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan serve --host=0.0.0.0 --port=80"
@@ -32,8 +34,8 @@ RUN apt-get update && apt-get upgrade -y \
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.3
 
-RUN groupadd --force -g 1000 sail
-RUN useradd -ms /bin/bash --no-user-group -g 1000 -u 1337 sail
+RUN groupadd --force -g $WWWGROUP sail
+RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
