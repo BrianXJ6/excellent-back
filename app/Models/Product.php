@@ -31,4 +31,14 @@ class Product extends BaseSimpleModel
             'stock' => 'integer',
         ];
     }
+
+    /**
+     * Get the images for the blog post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productImages(): HasMany
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }
