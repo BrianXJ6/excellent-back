@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Support\ORM\BaseSimpleModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends BaseSimpleModel
 {
@@ -33,12 +34,22 @@ class Product extends BaseSimpleModel
     }
 
     /**
-     * Get the images for the blog post.
+     * Get the images for the product.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productImages(): HasMany
     {
         return $this->hasMany(ProductImage::class);
+    }
+
+    /**
+     * The orders that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class);
     }
 }
