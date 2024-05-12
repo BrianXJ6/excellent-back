@@ -22,7 +22,7 @@ class ProductImage extends BaseSimpleModel
     protected $fillable = ['path'];
 
     /**
-     * Get the product that owns the comment.
+     * Get the product that owns the image.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
