@@ -3,12 +3,22 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Dto\StoreOrderDto;
 use Illuminate\Support\Collection;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class OrderService
 {
+    /**
+     * Default values for relationships between order and product
+     *
+     * @var array
+     */
+    protected const WITH = [
+        'products:id,title',
+        'products.productImages:product_id,path',
+    ];
+
     /**
      * Display a listing of the orders.
      *
@@ -16,20 +26,9 @@ class OrderService
      */
     public function listAll(): Collection
     {
-        return Order::with([
-            'products' => function (Builder $query) {
-                /** @disregard  */
-                $query->select(['products.id', 'products.title'])
-                    ->orderByDesc('products.id');
-            },
-            'products.productImages' => function (Builder $query) {
-                /** @disregard */
-                $query->select(['product_images.product_id', 'product_images.path'])
-                    ->orderByDesc('product_images.id');
-            }
-        ])
-        ->latest((new Order())->getKeyName())
-        ->get();
+        return Order::with(self::WITH)
+                    ->latest((new Order())->getKeyName())
+                    ->get();
     }
 
     /**

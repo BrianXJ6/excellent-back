@@ -34,7 +34,6 @@ class OrderResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'qtd' => $this->qtd,
             'created_at' => $this->created_at->from(),
             'updated_at' => $this->updated_at->from(),
             'products' => ProductResource::collection($this->products),

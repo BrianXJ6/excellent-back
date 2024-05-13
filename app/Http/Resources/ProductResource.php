@@ -38,6 +38,7 @@ class ProductResource extends JsonResource
             'images' => ProductImageResource::collection($this->productImages),
             'updated_at' => $this->when(!empty($this->updated_at), $this->updated_at?->from()),
             'created_at' => $this->when(!empty($this->created_at), $this->created_at?->from()),
+            'quantity' => $this->when($this->resource->pivot, $this->resource->pivot->quantity),
         ];
     }
 }

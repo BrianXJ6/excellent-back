@@ -16,8 +16,6 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'qtd' => fake()->randomDigitNotNull()
-        ];
+        return [];
     }
 }

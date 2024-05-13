@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Order::factory(3)
-            ->has(Product::factory(3)->has(ProductImage::factory()->count(3)))
+            ->hasAttached(
+                Product::factory(3)->has(ProductImage::factory()->count(3)),
+                ['quantity' => fake()->randomDigitNotZero()]
+            )
             ->create();
     }
 }
