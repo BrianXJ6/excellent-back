@@ -32,8 +32,8 @@ class ProductImage extends BaseSimpleModel
     {
         return Attribute::make(
             get: function (?string $path) {
-                if (!$path) {
-                    return null;
+                if (!$path || filter_var($path, FILTER_VALIDATE_URL)) {
+                    return $path;
                 }
 
                 /** @var \Illuminate\Filesystem\Filesystem */
