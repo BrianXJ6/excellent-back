@@ -40,8 +40,14 @@ Now we can raise our application with the following command:
 sail up -d
 ```
 
-Finally, with the next command, we will generate our app key and run our migrations in the database so that the application can start being used.
+With the next command, we will generate our app key and make our file directory publicly accessible.
 
 ```bash
-sail a key:generate && sail a migrate
+sail a key:generate && sail a storage:link
+```
+
+Finally, let's run our migrations on the database so that the application can start being used, run the following command:
+
+```bash
+sail a migrate --seed
 ```
