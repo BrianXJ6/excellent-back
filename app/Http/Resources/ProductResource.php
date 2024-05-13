@@ -32,12 +32,12 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'description' => $this->description,
-            'price' => (float) $this->price,
-            'stock' => $this->stock,
+            'description' => $this->when(!empty($this->description), $this->description),
+            'price' => $this->when(!empty($this->price), (float) $this->price),
+            'stock' => $this->when(!empty($this->stock), $this->stock),
             'images' => ProductImageResource::collection($this->productImages),
-            'created_at' => $this->created_at->from(),
-            'updated_at' => $this->updated_at->from(),
+            'updated_at' => $this->when(!empty($this->updated_at), $this->updated_at?->from()),
+            'created_at' => $this->when(!empty($this->created_at), $this->created_at?->from()),
         ];
     }
 }
