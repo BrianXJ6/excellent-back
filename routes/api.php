@@ -8,4 +8,5 @@ Route::apiResource('products', ProductController::class);
 
 Route::prefix('orders')->name('orders.')->controller(OrderController::class)->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::delete('{order}', 'destroy')->name('destroy');
 });
