@@ -17,7 +17,9 @@ class ProductService
      */
     public function listAll(): Collection
     {
-        return Product::with('productImages:product_id,path')->get();
+        return Product::with('productImages:product_id,path')
+                        ->latest((new Product())->getKeyName())
+                        ->get();
     }
 
     /**
