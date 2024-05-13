@@ -107,7 +107,7 @@ class ProductService
         $images = $product->productImages;
 
         if (!$images->isEmpty()) {
-            Storage::disk('public')->delete($images->pluck('path')->toArray());
+            Storage::disk('public')->delete($images->map(fn ($item) => $item->getRawOriginal('path'))->toArray());
         }
     }
 }
