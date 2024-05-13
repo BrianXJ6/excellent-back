@@ -18,7 +18,7 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['sometimes', 'string', 'max:100', Rule::unique(Product::class)],
+            'title' => ['sometimes', 'string', 'max:100', Rule::unique(Product::class)->ignore($this->product->id)],
             'description' => ['sometimes', 'nullable', 'string', 'max:255'],
             'price' => ['sometimes', 'decimal:2', 'between:0.01,999999.99'],
             'stock' => ['sometimes', 'integer', 'min:1'],
